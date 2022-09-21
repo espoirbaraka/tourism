@@ -2,9 +2,9 @@
   <!-- Logo -->
   <a href="index" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>R</b>A</span>
+    <span class="logo-mini"><b>K</b>T</span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>RAPDFEM Asbl</b></span>
+    <span class="logo-lg"><b>KIVU-TOUR</b></span>
   </a>
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
@@ -18,19 +18,19 @@
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="<?php echo (!empty($user['photo'])) ? 'img/'.$user['photo'] : 'img/user.png'; ?>" class="user-image" alt="User Image">
-            <span class="hidden-xs"><?php echo $user['username']; ?></span>
+            <img src="<?php echo (!empty($user['Photo'])) ? 'img/'.$user['Photo'] : 'img/user.png'; ?>" class="user-image" alt="User Image">
+            <span class="hidden-xs"><?php echo $user['Username']; ?></span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="<?php echo (!empty($user['photo'])) ? 'img/'.$user['photo'] : 'img/user.png'; ?>" class="img-circle" alt="User Image">
+              <img src="<?php echo (!empty($user['Photo'])) ? 'img/'.$user['Photo'] : 'img/user.png'; ?>" class="img-circle" alt="User Image">
 
               <p>
                 <?php
-                echo $user['username'];
+                echo $user['Username'];
                  ?>
-                <small>Membre depuis <?php echo date('M. Y', strtotime($user['created_on'])); ?></small>
+                <small>Membre depuis <?php echo date('M. Y', strtotime($user['Created_On'])); ?></small>
               </p>
             </li>
             <li class="user-footer">
