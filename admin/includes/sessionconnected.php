@@ -13,3 +13,5 @@
 	$user = $stmt->fetch();
 
 	$pdo->close();
+
+?>
