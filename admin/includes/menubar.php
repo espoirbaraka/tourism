@@ -18,7 +18,7 @@
       <li><a href="home"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="treeview">
             <a href="#">
-                <i class="fa fa-cogs"></i>
+                <i class="fa fa-map"></i>
                 <span>Site touristique</span>
                 <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -43,6 +43,7 @@
             </ul>
         </li>
         <li><a href="paiement"><i class="fa fa-money"></i> <span>Paiement</span></a></li>
+        <li><a href="visite"><i class="fa fa-map"></i> <span>Visite</span></a></li>
 
       <li class="header">PARAMETRES</li>
       <li class="treeview">

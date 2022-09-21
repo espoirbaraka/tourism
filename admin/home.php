@@ -66,14 +66,14 @@
             <?php
                 $stmt1 = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM tbl_user");
                 $stmt1->execute();
-                $stmt2 = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM tbl_publication");
+                $stmt2 = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM tbl_site");
                 $stmt2->execute();
                 $usernumber =  $stmt1->fetch();
-                $pubnumber =  $stmt2->fetch();
+                $sitenumber =  $stmt2->fetch();
 
-                echo "<h3>".$pubnumber['numrows']."</h3>";
+                echo "<h3>".$sitenumber['numrows']."</h3>";
               ?>
-              <p>Publications</p>
+              <p>Sites touristiques</p>
             </div>
             <div class="icon">
               <i class="fa fa-print"></i>
@@ -87,13 +87,13 @@
           <div class="small-box bg-green">
             <div class="inner">
             <?php
-                $stmt = $conn->prepare("SELECT *, SUM(count_seen) AS summrows FROM tbl_publication");
+                $stmt = $conn->prepare("SELECT *, SUM(count_seen) AS summrows FROM tbl_reservation");
                 $stmt->execute();
-                $prow =  $stmt->fetch();
+                $rrow =  $stmt->fetch();
 
-                echo "<h3>".$prow['summrows']."</h3>";
+                echo "<h3>".$rrow['summrows']."</h3>";
               ?>
-              <p>Total des vues</p>
+              <p>Total des reservations</p>
             </div>
             <div class="icon">
               <i class="fa fa-desktop"></i>
@@ -107,13 +107,13 @@
           <div class="small-box bg-yellow">
             <div class="inner">
             <?php
-                $stmt = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM tbl_publication WHERE MONTH(created_on)=:mois");
+                $stmt = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM tbl_reservation WHERE MONTH(Date)=:mois");
                 $stmt->execute(['mois'=>$mois]);
-                $prow =  $stmt->fetch();
+                $rrow =  $stmt->fetch();
 
-                echo "<h3>".$prow['numrows']."</h3>";
+                echo "<h3>".$rrow['numrows']."</h3>";
               ?>
-              <p>Publications de ce mois</p>
+              <p>Reservations de ce mois</p>
             </div>
             <div class="icon">
               <i class="fa fa-user"></i>
