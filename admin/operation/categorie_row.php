@@ -6,7 +6,7 @@ if(isset($_POST['id'])){
 
     $conn = $pdo->open();
 
-    $stmt = $conn->prepare("SELECT * FROM tbl_publication WHERE id=:id");
+    $stmt = $conn->prepare("SELECT * FROM tbl_categorie WHERE CodeCategorie=:id");
     $stmt->execute(['id'=>$id]);
     $row = $stmt->fetch();
 

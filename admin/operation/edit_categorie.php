@@ -2,14 +2,14 @@
 include '../includes/sessionconnected.php';
 
 if(isset($_POST['edit'])){
-    $password = htmlspecialchars(sha1($_POST['password']));
+    $categorie = $_POST['categorie'];
     $id = $_POST['id'];
 
     $conn = $pdo->open();
     try{
-        $stmt = $conn->prepare("UPDATE tbl_user SET Password=:password WHERE CodeUser=:id");
-        $stmt->execute(['password'=>$password, 'id'=>$id]);
-        $_SESSION['success'] = 'Mot de passe modifié';
+        $stmt = $conn->prepare("UPDATE tbl_categorie SET Categorie=:categorie WHERE CodeCategorie=:id");
+        $stmt->execute(['categorie'=>$categorie, 'id'=>$id]);
+        $_SESSION['success'] = 'Categorie modifié';
     }
     catch(PDOException $e){
         $_SESSION['error'] = $e->getMessage();
@@ -20,6 +20,6 @@ else{
     $_SESSION['error'] = 'Compléter le formulaire d\'ajout materiel';
 }
 
-header('location: ../user');
+header('location: ../categorie_site');
 
 ?>

@@ -6,7 +6,7 @@ if(isset($_POST['remove'])){
 
     $conn = $pdo->open();
     try{
-        $stmt = $conn->prepare("DELETE FROM tbl_user WHERE id=:id");
+        $stmt = $conn->prepare("DELETE FROM tbl_user WHERE CodeUser=:id");
         $stmt->execute(['id'=>$id]);
         $_SESSION['success'] = 'Utilisateur supprimé';
     }
@@ -19,6 +19,6 @@ else{
     $_SESSION['error'] = 'Compléter le formulaire d\'ajout materiel';
 }
 
-header('location: ../user.php');
+header('location: ../user');
 
 ?>

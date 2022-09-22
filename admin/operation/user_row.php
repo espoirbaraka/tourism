@@ -6,7 +6,7 @@ if(isset($_POST['id'])){
 
     $conn = $pdo->open();
 
-    $stmt = $conn->prepare("SELECT * FROM tbl_user WHERE id=:id");
+    $stmt = $conn->prepare("SELECT * FROM tbl_user WHERE CodeUser=:id");
     $stmt->execute(['id'=>$id]);
     $row = $stmt->fetch();
 

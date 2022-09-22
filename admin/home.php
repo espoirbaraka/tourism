@@ -87,7 +87,7 @@
           <div class="small-box bg-green">
             <div class="inner">
             <?php
-                $stmt = $conn->prepare("SELECT *, SUM(count_seen) AS summrows FROM tbl_reservation");
+                $stmt = $conn->prepare("SELECT *, COUNT(*) AS summrows FROM tbl_reservation");
                 $stmt->execute();
                 $rrow =  $stmt->fetch();
 
@@ -148,7 +148,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Top 10 des publications les plus vues</h3>
+              <h3 class="box-title">Reservation mensuelle</h3>
               <div class="box-tools pull-right">
                 <form class="form-inline">
                   <div class="form-group">
@@ -189,26 +189,29 @@
 
 <!-- Chart Data -->
 <?php
-$nospub = array();
-$nosnombres = array();
-$stmt1 = $conn->prepare("SELECT id,SUBSTRING(titre, 1, 10) as pub FROM tbl_publication ORDER BY count_seen DESC LIMIT 10");
-$stmt1->execute();
-foreach($stmt1 as $row)
-{
-    $pub = $row['id'];
-    $pubs = $row['pub'];
-    $stmt2 = $conn->prepare("SELECT count_seen as nbre FROM tbl_publication WHERE id=:pub");
-    $stmt2->execute(['pub'=>$pub]);
-    foreach($stmt2 as $row)
-    {
-        $nombres = $row['nbre'];
+$reservation = array();
+$months = array();
+for( $m = 1; $m <= 12; $m++ ) {
+    try{
+        $stmt = $conn->prepare("SELECT COUNT(CodeReservation) as nombre FROM tbl_reservation WHERE MONTH(Date)=:month AND YEAR(Date)=:year");
+        $stmt->execute(['month'=>$m, 'year'=>$year]);
+        $total = 0;
+        foreach($stmt as $row){
+            $nombre = $row['nombre'];
+        }
+        array_push($reservation, round($nombre, 2));
     }
-    array_push($nosnombres, $nombres);
-    array_push($nospub, $pubs);
+    catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    $num = str_pad( $m, 2, 0, STR_PAD_LEFT );
+    $month =  date('M', mktime(0, 0, 0, $m, 1));
+    array_push($months, $month);
 }
 
-$nosnombres = json_encode($nosnombres);
-$nospubs = json_encode($nospub);
+$months = json_encode($months);
+$reservation = json_encode($reservation);
 
 ?>
 <!-- End Chart Data -->
@@ -222,17 +225,17 @@ $(function(){
   var barChartCanvas = $('#barChart').get(0).getContext('2d')
   var barChart = new Chart(barChartCanvas)
   var barChartData = {
-    labels  : <?php echo $nospubs; ?>,
+    labels  : <?php echo $months; ?>,
     datasets: [
       {
-        label               : 'PUBLICATION',
+        label               : 'RESERVATION',
         fillColor           : 'rgba(60,141,188,0.9)',
         strokeColor         : 'rgba(60,141,188,0.8)',
         pointColor          : '#3b8bba',
         pointStrokeColor    : 'rgba(60,141,188,1)',
         pointHighlightFill  : '#fff',
         pointHighlightStroke: 'rgba(60,141,188,1)',
-        data                : <?php echo $nosnombres; ?>
+        data                : <?php echo $reservation; ?>
       }
     ]
   }

@@ -6,7 +6,7 @@ if(isset($_POST['id'])){
 
     $conn = $pdo->open();
 
-    $stmt = $conn->prepare("SELECT * FROM tbl_commentaire_pub WHERE CodeComment=:id");
+    $stmt = $conn->prepare("SELECT * FROM tbl_province WHERE CodeProvince=:id");
     $stmt->execute(['id'=>$id]);
     $row = $stmt->fetch();
 

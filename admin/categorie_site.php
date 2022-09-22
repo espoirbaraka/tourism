@@ -23,11 +23,11 @@ $conn = $pdo->open();
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Thématique
+                Categories des sites
             </h1>
             <ol class="breadcrumb">
                 <li><a href="home"><i class="fa fa-dashboard"></i> Accueil</a></li>
-                <li class="active">Thématique</li>
+                <li class="active">Categories des sites</li>
             </ol>
         </section>
 
@@ -59,14 +59,14 @@ $conn = $pdo->open();
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-
+                        <div class="box-header with-border">
+                            <a href="#addcategorie" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nouveau</a>
+                        </div>
                         <div class="box-body">
                             <div style="overflow: auto;">
                                 <table id="tableau" class="table table-bordered">
                                     <thead>
-                                    <th>Image illustrative</th>
-                                    <th>Titre</th>
-                                    <th>Contenue</th>
+                                    <th>Categorie</th>
                                     <th>Action</th>
                                     </thead>
                                     <tbody>
@@ -74,20 +74,16 @@ $conn = $pdo->open();
                                     $conn = $pdo->open();
 
                                     try{
-                                        $stmt = $conn->prepare("SELECT * FROM tbl_categorie_pub");
+                                        $stmt = $conn->prepare("SELECT * FROM tbl_categorie");
                                         $stmt->execute();
-                                        foreach($stmt as $categ){
-                                            $image = (!empty($categ['Photo'])) ? 'img/'.$categ['Photo'] : 'img/user.png';
+                                        foreach($stmt as $categorie){
 
                                             echo "
                           <tr>
+                            <td>".$categorie['Categorie']."</td>
                             <td>
-                                <img src='".$image."' height='30px' width='30px'>
-                            </td>
-                            <td>".$categ['Categorie']."</td>
-                            <td>".$categ['Contenue']."</td>
-                            <td>
-                                <a href='edit_thematique.php?them=".$categ['CodeCateg']."' class='btn btn-primary btn-sm btn-flat'><i class='fa fa-edit'></i></a>
+                                <button class='btn btn-primary btn-sm edit btn-flat' data-id='".$categorie['CodeCategorie']."'><i class='fa fa-edit'></i> </button>
+                                <button class='btn btn-danger btn-sm remove btn-flat' data-id='".$categorie['CodeCategorie']."'><i class='fa fa-remove'></i> </button>
                             </td>
                           </tr>
                         ";
@@ -112,11 +108,46 @@ $conn = $pdo->open();
         <!-- right col -->
     </div>
     <?php include 'includes/footer.php'; ?>
+    <?php include 'modal/categorie.php'; ?>
 </div>
 <!-- ./wrapper -->
 
 
 <?php include 'includes/scripts.php'; ?>
+<script>
+    $(function(){
 
+        $(document).on('click', '.edit', function(e){
+            e.preventDefault();
+            $('#edit').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+        $(document).on('click', '.remove', function(e){
+            e.preventDefault();
+            $('#remove').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+
+
+    });
+
+    function getRow(id){
+        $.ajax({
+            type: 'POST',
+            url: 'operation/categorie_row.php',
+            data: {id:id},
+            dataType: 'json',
+            success: function(response){
+                $('.code').val(response.CodeCategorie);
+                $('#categorie').val(response.Categorie);
+                $('.fullname').html(response.Categorie);
+            }
+        });
+    }
+</script>
 </body>
 </html>

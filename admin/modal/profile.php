@@ -13,21 +13,14 @@
                   	<label for="username" class="col-sm-3 control-label">Username</label>
 
                   	<div class="col-sm-9">
-                    	<input type="text" class="form-control" id="username" name="username" value="<?php echo $user['username']; ?>">
+                    	<input type="text" class="form-control" id="username" name="username" value="<?php echo $user['Username']; ?>">
                   	</div>
-                </div>
-                <div class="form-group">
-                    <label for="mail" class="col-sm-3 control-label">Adresse mail</label>
-
-                    <div class="col-sm-9"> 
-                      <input type="email" class="form-control" id="email" name="email" value="<?php echo $user['email']; ?>">
-                    </div>
                 </div>
                 <div class="form-group">
                     <label for="password" class="col-sm-3 control-label">Mot de passe</label>
 
                     <div class="col-sm-9"> 
-                      <input type="password" class="form-control" id="password" name="password" value="<?php echo $user['password']; ?>">
+                      <input type="password" class="form-control" id="password" name="password" value="<?php echo $user['Password']; ?>">
                     </div>
                 </div>
                 <div class="form-group">

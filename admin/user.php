@@ -68,7 +68,6 @@
                 <thead>
                   <th>Photo</th>
                   <th>Username</th>
-                  <th>Mail</th>
                   <th>Dernière connection</th>
                   <th>Action</th>
                 </thead>
@@ -80,19 +79,18 @@
                       $stmt = $conn->prepare("SELECT * FROM tbl_user");
                       $stmt->execute();
                       foreach($stmt as $user){
-                        $image = (!empty($user['photo'])) ? 'img/'.$user['photo'] : 'img/user.png';
+                        $image = (!empty($user['Photo'])) ? 'img/'.$user['Photo'] : 'img/user.png';
                         
                         echo "
                           <tr>
                             <td>
                                 <img src='".$image."' height='30px' width='30px'>
                             </td>
-                            <td>".$user['username']."</td>
-                            <td>".$user['email']."</td>
+                            <td>".$user['Username']."</td>
                             <td>".date("d/m/Y", strtotime($user['last_connection']))."</td>
                             <td>
-                                <button class='btn btn-primary btn-sm edit btn-flat' data-id='".$user['id']."'><i class='fa fa-edit'></i> </button>
-                                <button class='btn btn-danger btn-sm remove btn-flat' data-id='".$user['id']."'><i class='fa fa-remove'></i> </button>
+                                <button class='btn btn-primary btn-sm edit btn-flat' data-id='".$user['CodeUser']."'><i class='fa fa-edit'></i> </button>
+                                <button class='btn btn-danger btn-sm remove btn-flat' data-id='".$user['CodeUser']."'><i class='fa fa-remove'></i> </button>
                             </td>
                           </tr>
                         ";
@@ -151,9 +149,9 @@ $.ajax({
   data: {id:id},
   dataType: 'json',
   success: function(response){
-    $('.code').val(response.id);
-    $('#password').val(response.password);
-    $('.fullname').html(response.username);
+    $('.code').val(response.CodeUser);
+    $('#password').val(response.Password);
+    $('.fullname').html(response.Username);
    }
 });
 }
