@@ -46,12 +46,6 @@
                           <input type="text" id="username" name="username" autocomplet="off" class="form-control" required>
                       </div>
                   </div>
-                <div class="form-group">
-                    <label for="etiquette" class="col-sm-3 control-label">Mail</label>
-                    <div class="col-sm-9">
-                      <input type="email" id="mail" name="mail" autocomplet="off" class="form-control" required>
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <label for="username" class="col-sm-3 control-label">Mot de passe</label>

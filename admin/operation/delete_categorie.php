@@ -1,14 +1,14 @@
 <?php
 include '../includes/sessionconnected.php';
 
-if(isset($_POST['delete'])){
+if(isset($_POST['remove'])){
     $id = $_POST['id'];
 
     $conn = $pdo->open();
     try{
-        $stmt = $conn->prepare("DELETE FROM tbl_publication WHERE id=:id");
+        $stmt = $conn->prepare("DELETE FROM tbl_categorie WHERE CodeCategorie=:id");
         $stmt->execute(['id'=>$id]);
-        $_SESSION['success'] = 'Article supprimé';
+        $_SESSION['success'] = 'Categorie supprimée';
     }
     catch(PDOException $e){
         $_SESSION['error'] = $e->getMessage();
@@ -19,6 +19,6 @@ else{
     $_SESSION['error'] = 'Compléter le formulaire d\'ajout materiel';
 }
 
-header('location: ../publication.php');
+header('location: ../categorie_site');
 
 ?>

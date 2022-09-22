@@ -6,16 +6,15 @@ if(isset($_GET['return'])){
 
 }
 else{
-    $return = '../home.php';
+    $return = '../home';
 }
 
 if(isset($_POST['save'])){
     $password_actuel = sha1($_POST['password_actuel']);
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $email = $_POST['email'];
     $photo = $_FILES['photo']['name'];
-    if($password_actuel == $user['password']){
+    if($password_actuel == $user['Password']){
         if(!empty($photo)){
             move_uploaded_file($_FILES['photo']['tmp_name'], '../img/'.$photo);
             $filename = $photo;
@@ -28,8 +27,8 @@ if(isset($_POST['save'])){
         $conn = $pdo->open();
 
         try{
-            $stmt = $conn->prepare("UPDATE tbl_user SET username=:username, password=:password, email=:email, Photo=:photo WHERE id=:code");
-            $stmt->execute(['username'=>$username, 'password'=>$password, 'email'=>$email, 'photo'=>$filename, 'code'=>$user['id']]);
+            $stmt = $conn->prepare("UPDATE tbl_user SET Username=:username, Password=:password, Photo=:photo WHERE CodeUser=:code");
+            $stmt->execute(['username'=>$username, 'password'=>$password, 'photo'=>$filename, 'code'=>$user['CodeUser']]);
 
             $_SESSION['success'] = 'Compte mis à jour avec succès';
         }

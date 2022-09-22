@@ -6,9 +6,9 @@ if(isset($_POST['remove'])){
 
     $conn = $pdo->open();
     try{
-        $stmt = $conn->prepare("DELETE FROM tbl_commentaire_pub WHERE CodeComment=:id");
+        $stmt = $conn->prepare("DELETE FROM tbl_province WHERE CodeProvince=:id");
         $stmt->execute(['id'=>$id]);
-        $_SESSION['success'] = 'Commentaire supprimé';
+        $_SESSION['success'] = 'Province supprimée';
     }
     catch(PDOException $e){
         $_SESSION['error'] = $e->getMessage();
@@ -19,6 +19,6 @@ else{
     $_SESSION['error'] = 'Compléter le formulaire d\'ajout materiel';
 }
 
-header('location: ../commentaire.php');
+header('location: ../province');
 
 ?>

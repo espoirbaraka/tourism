@@ -23,11 +23,11 @@ $conn = $pdo->open();
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Commentaires
+                Provinces
             </h1>
             <ol class="breadcrumb">
                 <li><a href="home"><i class="fa fa-dashboard"></i> Accueil</a></li>
-                <li class="active">Commentaires</li>
+                <li class="active">Provinces</li>
             </ol>
         </section>
 
@@ -59,16 +59,14 @@ $conn = $pdo->open();
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-
+                        <div class="box-header with-border">
+                            <a href="#addprovince" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nouveau</a>
+                        </div>
                         <div class="box-body">
                             <div style="overflow: auto;">
                                 <table id="tableau" class="table table-bordered">
                                     <thead>
-                                    <th>Auteur</th>
-                                    <th>Mail</th>
-                                    <th>Publication</th>
-                                    <th>Commentaire</th>
-                                    <th>Date</th>
+                                    <th>Province</th>
                                     <th>Action</th>
                                     </thead>
                                     <tbody>
@@ -76,21 +74,16 @@ $conn = $pdo->open();
                                     $conn = $pdo->open();
 
                                     try{
-                                        $stmt = $conn->prepare("SELECT * FROM tbl_commentaire_pub
-                                                                        INNER JOIN tbl_publication
-                                                                        ON tbl_commentaire_pub.CodePub=tbl_publication.id");
+                                        $stmt = $conn->prepare("SELECT * FROM tbl_province");
                                         $stmt->execute();
-                                        foreach($stmt as $comment){
+                                        foreach($stmt as $user){
 
                                             echo "
                           <tr>
-                            <td>".$comment['Nom']."</td>
-                            <td><a href='mailto:".$comment['Email']."'>".$comment['Email']."</a></td>
-                            <td>".$comment['titre']."</td>
-                            <td>".$comment['Commentaire']."</td>
-                            <td>".date("d/m/Y", strtotime($comment['Created_On']))."</td>
+                            <td>".$user['Province']."</td>
                             <td>
-                                <button class='btn btn-danger btn-sm remove btn-flat' data-id='".$comment['CodeComment']."'><i class='fa fa-remove'></i> </button>
+                                <button class='btn btn-primary btn-sm edit btn-flat' data-id='".$user['CodeProvince']."'><i class='fa fa-edit'></i> </button>
+                                <button class='btn btn-danger btn-sm remove btn-flat' data-id='".$user['CodeProvince']."'><i class='fa fa-remove'></i> </button>
                             </td>
                           </tr>
                         ";
@@ -115,7 +108,7 @@ $conn = $pdo->open();
         <!-- right col -->
     </div>
     <?php include 'includes/footer.php'; ?>
-    <?php include 'modal/commentaire.php'; ?>
+    <?php include 'modal/province.php'; ?>
 </div>
 <!-- ./wrapper -->
 
@@ -145,12 +138,13 @@ $conn = $pdo->open();
     function getRow(id){
         $.ajax({
             type: 'POST',
-            url: 'operation/commentaire_row.php',
+            url: 'operation/province_row.php',
             data: {id:id},
             dataType: 'json',
             success: function(response){
-                $('.code').val(response.CodeComment);
-                $('.fullname').html(response.Nom);
+                $('.code').val(response.CodeProvince);
+                $('#province').val(response.Province);
+                $('.fullname').html(response.Province);
             }
         });
     }
