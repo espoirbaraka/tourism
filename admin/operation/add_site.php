@@ -10,9 +10,9 @@ if(isset($_POST['add'])){
         if(!empty($filename)){
             move_uploaded_file($_FILES['photo']['tmp_name'], '../img/'.$filename);
         }
-        $stmt = $conn->prepare("INSERT INTO tbl_site(Designation,Adresse,Longitude,Latitude,Prevision,TempsPrevision,Gestionnaire,CodeCategorie,Image) 
-												VALUES(:designation, :adresse, :longitude, :latitude, :prix, :temps, :gestionnaire, :categorie, :image)");
-        $stmt->execute(['designation'=>$_POST['designation'], 'adresse'=>$_POST['adresse'], 'longitude'=>$_POST['longitude'], 'latitude'=>$_POST['latitude'],'prix'=>$_POST['prix'],'temps'=>$_POST['temps'],'gestionnaire'=>$_POST['gestionnaire'],'categorie'=>$_POST['categorie'],'image'=>$filename]);
+        $stmt = $conn->prepare("INSERT INTO tbl_site(Designation,Description,Adresse,Longitude,Latitude,Prevision,TempsPrevision,Gestionnaire,CodeCategorie,Image, CodeProvince) 
+												VALUES(:designation, :description, :adresse, :longitude, :latitude, :prix, :temps, :gestionnaire, :categorie, :image, :province)");
+        $stmt->execute(['designation'=>$_POST['designation'], 'description'=>$_POST['description'], 'adresse'=>$_POST['adresse'], 'longitude'=>$_POST['longitude'], 'latitude'=>$_POST['latitude'],'prix'=>$_POST['prix'],'temps'=>$_POST['temps'],'gestionnaire'=>$_POST['gestionnaire'],'categorie'=>$_POST['categorie'],'image'=>$filename,'province'=>$_POST['province']]);
         $_SESSION['success'] = 'Site ajouté';
     }
     catch(PDOException $e){

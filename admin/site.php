@@ -88,6 +88,7 @@ $conn = $pdo->open();
                                             echo "
                           <tr>
                             <td><img src='".$image."' height='30px' width='30px'></td>
+                            <td>".$site['Designation']."</td>
                             <td>".$site['Adresse']."</td>
                             <td>".$site['Prevision'].' $ pour '.$site['TempsPrevision']."</td>
                             <td>".$site['Gestionnaire']."</td>
@@ -95,6 +96,7 @@ $conn = $pdo->open();
                             <td>
                                 <button class='btn btn-primary btn-sm edit btn-flat' data-id='".$site['CodeSite']."'><i class='fa fa-edit'></i> </button>
                                 <button class='btn btn-danger btn-sm remove btn-flat' data-id='".$site['CodeSite']."'><i class='fa fa-remove'></i> </button>
+                                <a href='detail_site.php?code=".$site['CodeSite']."' class='btn btn-primary btn-sm'>Detail</a>
                             </td>
                           </tr>
                         ";
@@ -138,6 +140,13 @@ $conn = $pdo->open();
         $(document).on('click', '.remove', function(e){
             e.preventDefault();
             $('#remove').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+        $(document).on('click', '.image', function(e){
+            e.preventDefault();
+            $('#image').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });

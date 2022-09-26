@@ -30,6 +30,8 @@
 
 
 
+
+
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   	<style type="text/css">
@@ -80,5 +82,45 @@
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
 
+
+
+
+    <!--    IMAGE-->
+
+    <style>
+        .btn:focus, .btn:active, button:focus, button:active {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        #image-gallery .modal-footer{
+            display: block;
+        }
+
+        .thumb{
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+
+    <!-- image -->
+
+
+
+
+
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 
 </head>
