@@ -60,6 +60,25 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="username" class="col-sm-3 control-label">Province </label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="province" required>
+                                <option value="">--Selectionnez une province--</option>
+                                <?php
+                                $stmt = $conn->prepare("SELECT * FROM tbl_province");
+                                $stmt->execute();
+                                foreach ($stmt as $row){
+                                    ?>
+                                    <option value="<?php echo $row['CodeProvince'] ?>"><?php echo $row['Province'] ?></option>
+                                    <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Categorie </label>
                         <div class="col-sm-9">
                             <select class="form-control" name="categorie" required>
@@ -74,6 +93,13 @@
                                 }
                                 ?>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username" class="col-sm-3 control-label">Description </label>
+                        <div class="col-sm-9">
+                            <textarea name="description" class="form-control"></textarea>
                         </div>
                     </div>
 
@@ -163,6 +189,36 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Fermer</button>
                 <button type="submit" class="btn btn-primary btn-flat" name="edit"><i class="fa fa-edit"></i> Modifier</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Ajouter image -->
+<div class="modal fade" id="image">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>Ajouter une image</b></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST" action="operation/add_image_site.php" enctype="multipart/form-data">
+                    <input type="hidden" name="id" class="code">
+
+                    <div class="form-group">
+                        <label for="username" class="col-sm-3 control-label">Image </label>
+                        <div class="col-sm-9">
+                            <input type="file" id="photo" name="photo" autocomplet="off" class="form-control" required>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Fermer</button>
+                <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-edit"></i> Ajouter</button>
                 </form>
             </div>
         </div>
