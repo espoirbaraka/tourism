@@ -83,7 +83,7 @@ $conn = $pdo->open();
                             <td>".$categorie['Categorie']."</td>
                             <td>
                                 <button class='btn btn-primary btn-sm edit btn-flat' data-id='".$categorie['CodeCategorie']."'><i class='fa fa-edit'></i> </button>
-                                <button class='btn btn-danger btn-sm remove btn-flat' data-id='".$categorie['CodeCategorie']."'><i class='fa fa-remove'></i> </button>
+                                <button class='btn btn-success btn-sm remove btn-flat' data-id='".$categorie['CodeCategorie']."'><i class='fa fa-picture-o'></i> </button>
                             </td>
                           </tr>
                         ";
@@ -127,6 +127,14 @@ $conn = $pdo->open();
         $(document).on('click', '.remove', function(e){
             e.preventDefault();
             $('#remove').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+
+        $(document).on('click', '.edit2', function(e){
+            e.preventDefault();
+            $('#edit2').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });
