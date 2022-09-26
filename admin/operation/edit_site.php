@@ -8,7 +8,7 @@ if(isset($_POST['edit'])){
     $conn = $pdo->open();
     try{
         $stmt = $conn->prepare("UPDATE tbl_site SET Designation=:designation, Adresse=:adresse, Longitude=:longitude, Latitude=:latitude, Prevision=:prix, TempsPrevision=:temps, Gestionnaire=:gestionnaire WHERE CodeSite=:id");
-        $stmt->execute(['designation'=>$_POST['designation'], 'adresse'=>$_POST['adresse'], 'longitude'=>$_POST['longitude'], 'latitude'=>$_POST['latitude'],'prix'=>$_POST['prix'],'temps'=>$_POST['temps'],'gestionnaire'=>$_POST['gestionnaire']]);
+        $stmt->execute(['designation'=>$_POST['designation'], 'adresse'=>$_POST['adresse'], 'longitude'=>$_POST['longitude'], 'latitude'=>$_POST['latitude'],'prix'=>$_POST['prix'],'temps'=>$_POST['temps'],'gestionnaire'=>$_POST['gestionnaire'],'id'=>$_POST['id']]);
         $_SESSION['success'] = 'Site modifié';
     }
     catch(PDOException $e){

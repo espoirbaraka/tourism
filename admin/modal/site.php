@@ -106,57 +106,57 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><b>Modifier le site</b></h4>
+                <h4 class="modal-title"><b>Modifier le site <span class="fullname"></span></b></h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="POST" action="operation/edit_site.php" enctype="multipart/form-data">
                     <input type="hidden" name="id" class="code">
                     <div class="form-group">
-                        <label for="username" class="col-sm-3 control-label">Designation</label>
+                        <label class="col-sm-3 control-label">Designation</label>
                         <div class="col-sm-9">
-                            <input type="text" id="edit_designation" name="designation" autocomplet="off" class="form-control" required>
+                            <input type="text" name="designation" id="edit_designation" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Adresse</label>
                         <div class="col-sm-9">
-                            <input type="text" id="edit_adresse" name="adresse" autocomplet="off" class="form-control" required>
+                            <input type="text" id="edit_adresse" name="adresse" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Longitude</label>
                         <div class="col-sm-9">
-                            <input type="text" id="edit_longitude" name="longitude" autocomplet="off" class="form-control" required>
+                            <input type="text" id="edit_longitude" name="longitude" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Latitude</label>
                         <div class="col-sm-9">
-                            <input type="text" id="edit_latitude" name="latitude" autocomplet="off" class="form-control" required>
+                            <input type="text" id="edit_latitude" name="latitude" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Prevision prix ($)</label>
                         <div class="col-sm-9">
-                            <input type="number" id="edit_prix" name="prix" autocomplet="off" class="form-control" required>
+                            <input type="number" id="edit_prix" name="prix" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Prevision temps </label>
                         <div class="col-sm-9">
-                            <input type="text" id="edit_temps" name="temps" autocomplet="off" class="form-control" required>
+                            <input type="text" id="edit_temps" name="temps" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="username" class="col-sm-3 control-label">Gestionnaire </label>
                         <div class="col-sm-9">
-                            <input type="text" id="edit_gestionnaire" name="gestionnaire" autocomplet="off" class="form-control" required>
+                            <input type="text" id="edit_gestionnaire" name="gestionnaire" class="form-control" required>
                         </div>
                     </div>
             </div>

@@ -154,13 +154,13 @@ $conn = $pdo->open();
             dataType: 'json',
             success: function(response){
                 $('.code').val(response.CodeSite);
-                $('#designation').val(response.Designation);
-                $('#adresse').val(response.Adresse);
-                $('#longitude').val(response.Longitude);
-                $('#latitude').val(response.Latitude);
-                $('#prix').val(response.Prix);
-                $('#temps').val(response.TempsPrevision);
-                $('#gestionnaire').val(response.Gestionnaire);
+                $('#edit_designation').val(response.Designation);
+                $('#edit_adresse').val(response.Adresse);
+                $('#edit_longitude').val(response.Longitude);
+                $('#edit_latitude').val(response.Latitude);
+                $('#edit_prix').val(response.Prix);
+                $('#edit_temps').val(response.TempsPrevision);
+                $('#edit_gestionnaire').val(response.Gestionnaire);
                 $('.fullname').html(response.Designation);
             }
         });
