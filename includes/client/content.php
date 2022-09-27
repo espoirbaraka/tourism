@@ -13,6 +13,14 @@
                 </div>
             </section>
 
+
+            <?php
+            $client = $_SESSION['id_client'];
+            $stmt1 = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM tbl_reservation
+                                                                            WHERE CodeClient=$client");
+            $stmt1->execute();
+            $clientnumber =  $stmt1->fetch();
+            ?>
             <section id="main">
                 <div class="container">
                     <div class="row">
@@ -21,7 +29,8 @@
                                 <a href="#dashboard" class="list-group-item active main-color-bg">
                                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Dashboard
                                 </a>
-                                <a href="#reservation" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Mes reservations <span class="badge">12</span></a>
+                                <a href="#reservation" class="list-group-item"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Mes reservations <span class="badge"><?php echo $clientnumber['numrows'] ?></span></a>
+                                <a href="logout.php" class="list-group-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Se deconnecter </a>
                             </div>
 
 
@@ -37,19 +46,37 @@
                                 <div class="panel-body">
                                     <div class="col-md-4">
                                         <div class="well dash-box">
-                                            <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 203</h2>
-                                            <h4>Reservations</h4>
+                                            <?php
+                                            $client = $_SESSION['id_client'];
+                                            $stmt1 = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM tbl_reservation
+                                                                            WHERE CodeClient=$client");
+                                            $stmt1->execute();
+                                            $clientnumber =  $stmt1->fetch();
+                                            ?>
+                                            <h2><span class="glyphicon glyphicon-send" aria-hidden="true"></span> <?php echo $clientnumber['numrows'] ?></h2>
+                                            <h4>Mes reservations</h4>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="well dash-box">
-                                            <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 12</h2>
+                                            <?php
+                                            $stmt1 = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM tbl_site");
+                                            $stmt1->execute();
+                                            $sitenumber =  $stmt1->fetch();
+                                            ?>
+                                            <h2><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> <?php echo $sitenumber['numrows'] ?></h2>
                                             <h4>Nos sites</h4>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="well dash-box">
-                                            <h2><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 33</h2>
+                                            <?php
+                                            $client = $_SESSION['id_client'];
+                                            $stmt1 = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM tbl_categorie");
+                                            $stmt1->execute();
+                                            $categorienumber =  $stmt1->fetch();
+                                            ?>
+                                            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> <?php echo $categorienumber['numrows'] ?></h2>
                                             <h4>Nos categories</h4>
                                         </div>
                                     </div>
@@ -65,35 +92,35 @@
                                 <div class="panel-body">
                                     <table class="table table-striped table-hover">
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Joined</th>
+                                            <th>Date reservation</th>
+                                            <th>Place</th>
+                                            <th>Date visite</th>
+                                            <th>Prix</th>
+                                            <th>Action</th>
                                         </tr>
-                                        <tr>
-                                            <td>Jill Smith</td>
-                                            <td>jillsmith@gmail.com</td>
-                                            <td>Dec 12, 2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Eve Jackson</td>
-                                            <td>ejackson@yahoo.com</td>
-                                            <td>Dec 13, 2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td>John Doe</td>
-                                            <td>jdoe@gmail.com</td>
-                                            <td>Dec 13, 2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Stephanie Landon</td>
-                                            <td>landon@yahoo.com</td>
-                                            <td>Dec 14, 2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mike Johnson</td>
-                                            <td>mjohnson@gmail.com</td>
-                                            <td>Dec 15, 2016</td>
-                                        </tr>
+
+                                        <?php
+                                        $client = $_SESSION['id_client'];
+                                        $stmt = $conn->prepare("SELECT * FROM tbl_reservation
+                                                                        INNER JOIN tbl_site
+                                                                        ON tbl_reservation.CodeSite=tbl_site.CodeSite
+                                                                        WHERE CodeClient=$client");
+                                        $stmt->execute();
+                                        foreach ($stmt as $row){
+                                            ?>
+                                            <tr>
+                                                <td><?php echo date("d/m/Y", strtotime($row['Date'])) ?></td>
+                                                <td><?php echo $row['Designation'] ?></td>
+                                                <td><?php echo date("d/m/Y", strtotime($row['DateDepart'])) ?></td>
+                                                <td><?php echo $row['Prevision'].' $ pour '.$row['TempsPrevision'] ?></td>
+                                                <td><?php echo $row['Designation'] ?></td>
+                                            </tr>
+                                        <?php
+                                        }
+                                            ?>
+
+
+
                                     </table>
                                 </div>
                             </div>

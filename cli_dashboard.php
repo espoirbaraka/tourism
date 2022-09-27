@@ -1,5 +1,5 @@
 <?php
-include ("admin/includes/sessionclient.php");
+include ("admin/includes/sessionclient_connect.php");
 
 include ("includes/head_client.php");
 

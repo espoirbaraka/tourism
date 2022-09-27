@@ -17,7 +17,7 @@
                     if(isset($_SESSION['client'])){
                         ?>
                         <li>
-                            <a href="connection" class="nav-link"><i class="fas fa-user"></i> <?php echo $_SESSION['client'] ?></a>
+                            <a href="cli_dashboard" class="nav-link"><i class="fas fa-user"></i> Dashboard <?php echo $_SESSION['client'] ?></a>
                         </li>
                         <?php
                     }else{
