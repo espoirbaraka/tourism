@@ -18,8 +18,7 @@
                     <div class="inner">
 
 
-                        <form action="https://hotelpoint.phpscriptpoint.com/customer/login/store" method="post">
-                            <input type="hidden" name="_token" value="IDT37IxB1QJVTYRPbMgYqDR2gSIDhNDdRXecm7Ec">
+                        <form action="operation/create_account.php" method="POST">
                             <div class="form-group">
                                 <label for="">Nom</label>
                                 <input type="text" class="form-control" name="nom">
@@ -33,8 +32,12 @@
                                 <input type="text" class="form-control" name="prenom">
                             </div>
                             <div class="form-group">
-                                <label for="">Nom</label>
+                                <label for="">Telephone</label>
                                 <input type="tel" class="form-control" name="telephone">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Nationalité</label>
+                                <input type="text" class="form-control" name="nationalite">
                             </div>
                             <div class="form-group">
                                 <label for="">Adresse mail</label>
@@ -44,7 +47,7 @@
                                 <label for="">Mot de passe</label>
                                 <input type="password" class="form-control" name="password">
                             </div>
-                            <button type="submit" class="btn btn-primary">S'inscrire</button>
+                            <button type="submit" class="btn btn-primary" name="inscription">S'inscrire</button>
                             <div class="new-user">
                                 Avez-vous déjà un compte? <a href="connection" class="link">Connectez-vous</a>
                             </div>
