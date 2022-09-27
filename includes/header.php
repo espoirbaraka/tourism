@@ -13,9 +13,22 @@
             <div class="col-lg-6 col-md-7 col-sm-12">
                 <ul class="top-right">
 
-                    <li>
-                        <a href="connection" class="nav-link"><i class="fas fa-sign-in-alt"></i> Connection</a>
-                    </li>
+                    <?php
+                    if(isset($_SESSION['client'])){
+                        ?>
+                        <li>
+                            <a href="connection" class="nav-link"><i class="fas fa-user"></i> <?php echo $_SESSION['client'] ?></a>
+                        </li>
+                    <?php
+                    }else{
+                        ?>
+                        <li>
+                            <a href="connection" class="nav-link"><i class="fas fa-sign-in-alt"></i> Connection</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
+
 
                 </ul>
             </div>
