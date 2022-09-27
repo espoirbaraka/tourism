@@ -29,6 +29,6 @@ else{
 }
 
 $pdo->close();
-header('location: ../connection.php');
+header('location: ../cli_dashboard.php');
 
 ?>

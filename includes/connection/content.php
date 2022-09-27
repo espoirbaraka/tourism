@@ -21,7 +21,7 @@
                 <div class="reg-login-form">
                     <div class="inner">
 
-                        <form action="https://hotelpoint.phpscriptpoint.com/customer/login/store" method="post">
+                        <form action="operation/verify.php" method="post">
                             <?php
                             if(isset($_SESSION['error'])){
                                 echo "
