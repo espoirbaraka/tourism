@@ -8,7 +8,7 @@ if(isset($_POST['inscription'])){
     $telephone = $_POST['telephone'];
     $email = $_POST['email'];
     $nationalite = $_POST['nationalite'];
-    $password = htmlspecialchars(sha1($_POST['password']));;
+    $password = htmlspecialchars(sha1($_POST['password']));
 
     $conn = $pdo->open();
     try{
