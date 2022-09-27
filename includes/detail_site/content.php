@@ -16,7 +16,7 @@
 
                 <div class="hotel-items">
 
-                    <a href="mandarin-oriental-villa.html">
+                    <a href="reserver.php?code=<?php echo $site['id'] ?>">
                         <i class="fas fa-money-bill"></i> Reserver
                     </a>
 

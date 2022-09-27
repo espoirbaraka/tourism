@@ -3,7 +3,7 @@ include 'conn.php';
 session_start();
 
 if(!isset($_SESSION['id_client']) || trim($_SESSION['id_client']) == ''){
-    header('location: ./index.php');
+    header('location: ./connection.php');
     exit();
 }
 

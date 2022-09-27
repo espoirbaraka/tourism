@@ -7,6 +7,31 @@
 
             <section id="breadcrumb">
                 <div class="container">
+
+                    <?php
+                    if(isset($_SESSION['error'])){
+                        echo "
+                                <div class='alert alert-danger alert-dismissible'>
+                                  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                                  <h4><i class='icon fa fa-warning'></i> Erreur!</h4>
+                                  ".$_SESSION['error']."
+                                </div>
+                              ";
+                        unset($_SESSION['error']);
+                    }
+                    if(isset($_SESSION['success'])){
+                        echo "
+                                <div class='alert alert-success alert-dismissible'>
+                                  <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+                                  <h4><i class='icon fa fa-check'></i> Succès!</h4>
+                                  ".$_SESSION['success']."
+                                </div>
+                              ";
+                        unset($_SESSION['success']);
+                    }
+                    ?>
+
+
                     <ol class="breadcrumb">
                         <li class="active">Espace client</li>
                     </ol>
@@ -113,7 +138,19 @@
                                                 <td><?php echo $row['Designation'] ?></td>
                                                 <td><?php echo date("d/m/Y", strtotime($row['DateDepart'])) ?></td>
                                                 <td><?php echo $row['Prevision'].' $ pour '.$row['TempsPrevision'] ?></td>
-                                                <td><?php echo $row['Designation'] ?></td>
+                                                <td>
+                                                    <?php
+                                                    if($row['Status']==0){
+                                                        ?>
+                                                        <form action="operation/annuler_reservation.php" method="POST">
+                                                            <input type="hidden" name="id" value="<?php echo $row['CodeReservation'] ?>">
+                                                            <button type="submit" name="annuler" class="btn btn-danger">Annuler</button>
+                                                        </form>
+                                                    <?php
+                                                    }
+                                                    ?>
+
+                                                </td>
                                             </tr>
                                         <?php
                                         }
