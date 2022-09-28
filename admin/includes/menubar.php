@@ -42,8 +42,7 @@
                 <li><a href="reservation"><i class="fa fa-circle-o"></i> Reservation</a></li>
             </ul>
         </li>
-        <li><a href="paiement"><i class="fa fa-money"></i> <span>Paiement</span></a></li>
-        <li><a href="visite"><i class="fa fa-map"></i> <span>Visite</span></a></li>
+
 
       <li class="header">PARAMETRES</li>
       <li class="treeview">
