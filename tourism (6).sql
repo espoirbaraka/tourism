@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 29 sep. 2022 à 10:40
+-- Généré le :  mer. 05 oct. 2022 à 16:51
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -71,7 +71,8 @@ CREATE TABLE `tbl_client` (
 --
 
 INSERT INTO `tbl_client` (`CodeClient`, `NomClient`, `PostnomClient`, `PrenomClient`, `Telephone`, `Nationalite`, `Email`, `Password`, `Photo`) VALUES
-(5, 'Tambwe', 'Saidi', 'Albert', '+243977553723', 'Congolaise', 'tambwe@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '');
+(5, 'Tambwe', 'Saidi', 'Albert', '+243977553723', 'Congolaise', 'tambwe@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', ''),
+(6, 'Siwa', 'Mumbere', 'Carin', '+243 977 553 72', 'Congolaise', 'siwamumberecarin1998@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '');
 
 -- --------------------------------------------------------
 
@@ -82,8 +83,19 @@ INSERT INTO `tbl_client` (`CodeClient`, `NomClient`, `PostnomClient`, `PrenomCli
 CREATE TABLE `tbl_paiement` (
   `CodePaiement` int(11) NOT NULL,
   `Montant` float NOT NULL,
-  `Date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `Date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `CodeReserv` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `tbl_paiement`
+--
+
+INSERT INTO `tbl_paiement` (`CodePaiement`, `Montant`, `Date`, `CodeReserv`) VALUES
+(1, 100, '2022-10-05 10:50:50', 10),
+(2, 10, '2022-10-05 10:51:07', 6),
+(3, 10, '2022-10-05 10:55:55', 5),
+(4, 300, '2022-10-05 11:12:44', 11);
 
 -- --------------------------------------------------------
 
@@ -217,7 +229,6 @@ CREATE TABLE `tbl_reservation` (
   `CodeReservation` int(11) NOT NULL,
   `CodeSite` int(11) NOT NULL,
   `CodeClient` int(11) NOT NULL,
-  `CodePaiement` int(11) NOT NULL,
   `DateDepart` datetime NOT NULL,
   `Status` int(11) NOT NULL,
   `Date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -227,11 +238,15 @@ CREATE TABLE `tbl_reservation` (
 -- Déchargement des données de la table `tbl_reservation`
 --
 
-INSERT INTO `tbl_reservation` (`CodeReservation`, `CodeSite`, `CodeClient`, `CodePaiement`, `DateDepart`, `Status`, `Date`) VALUES
-(3, 2, 4, 0, '2022-09-29 00:00:00', 0, '2022-09-27 13:30:35'),
-(4, 6, 4, 0, '2022-09-29 00:00:00', 1, '2022-09-27 13:31:41'),
-(5, 8, 5, 0, '2022-09-29 00:00:00', 0, '2022-09-27 13:33:25'),
-(6, 3, 5, 0, '2022-09-30 00:00:00', 0, '2022-09-28 06:36:15');
+INSERT INTO `tbl_reservation` (`CodeReservation`, `CodeSite`, `CodeClient`, `DateDepart`, `Status`, `Date`) VALUES
+(3, 2, 4, '2022-09-29 00:00:00', 0, '2022-10-05 09:31:35'),
+(4, 6, 4, '2022-09-29 00:00:00', 1, '2022-10-05 09:31:38'),
+(5, 8, 5, '2022-09-29 00:00:00', 1, '2022-10-05 10:55:55'),
+(6, 3, 5, '2022-09-30 00:00:00', 1, '2022-10-05 10:51:07'),
+(9, 2, 5, '2022-09-30 00:00:00', 0, '2022-10-05 09:31:47'),
+(10, 6, 5, '2022-10-04 00:00:00', 1, '2022-10-05 10:50:50'),
+(11, 4, 6, '2022-10-14 00:00:00', 1, '2022-10-05 11:12:44'),
+(12, 2, 6, '2022-10-16 00:00:00', 0, '2022-10-05 11:11:34');
 
 -- --------------------------------------------------------
 
@@ -290,9 +305,9 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`CodeUser`, `Username`, `Password`, `Photo`, `Created_On`, `last_connection`) VALUES
-(1, 'Espoir', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'espoir.jpg', '2022-09-28 06:38:51', '2022-09-28 00:00:00'),
+(1, 'Espoir', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'espoir.jpg', '2022-10-05 09:22:00', '2022-10-05 00:00:00'),
 (3, 'siwa', 'd033e22ae348aeb5660fc2140aec35850c4da997', '', '2022-09-21 19:57:02', '0000-00-00 00:00:00'),
-(4, 'eric', '12345', 'IMG_9288.jpg', '2022-09-27 09:01:06', '2022-09-27 00:00:00');
+(4, 'eric', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'IMG_9288.jpg', '2022-09-29 08:44:42', '2022-09-27 00:00:00');
 
 --
 -- Index pour les tables déchargées
@@ -360,13 +375,13 @@ ALTER TABLE `tbl_categorie`
 -- AUTO_INCREMENT pour la table `tbl_client`
 --
 ALTER TABLE `tbl_client`
-  MODIFY `CodeClient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `CodeClient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `tbl_paiement`
 --
 ALTER TABLE `tbl_paiement`
-  MODIFY `CodePaiement` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CodePaiement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `tbl_photo`
@@ -384,7 +399,7 @@ ALTER TABLE `tbl_province`
 -- AUTO_INCREMENT pour la table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `CodeReservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `CodeReservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `tbl_site`
