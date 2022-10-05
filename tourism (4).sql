@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 26 sep. 2022 à 23:01
+-- Généré le :  jeu. 29 sep. 2022 à 10:40
 -- Version du serveur :  10.4.8-MariaDB
 -- Version de PHP :  7.3.10
 
@@ -65,6 +65,13 @@ CREATE TABLE `tbl_client` (
   `Password` text NOT NULL,
   `Photo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `tbl_client`
+--
+
+INSERT INTO `tbl_client` (`CodeClient`, `NomClient`, `PostnomClient`, `PrenomClient`, `Telephone`, `Nationalite`, `Email`, `Password`, `Photo`) VALUES
+(5, 'Tambwe', 'Saidi', 'Albert', '+243977553723', 'Congolaise', 'tambwe@gmail.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '');
 
 -- --------------------------------------------------------
 
@@ -172,7 +179,11 @@ INSERT INTO `tbl_photo` (`CodePhoto`, `Photo`, `Description`, `Created_On`, `Cod
 (74, '293542041.jpg', '', '2022-09-26 14:01:14', 9),
 (75, 'lake-view.jpg', '', '2022-09-26 14:01:26', 9),
 (76, '293542041.jpg', '', '2022-09-26 14:45:26', 1),
-(77, 'goma-rdc-kivu.jpg', '', '2022-09-26 16:01:38', 4);
+(77, 'goma-rdc-kivu.jpg', '', '2022-09-26 16:01:38', 4),
+(78, '1.jpg', '', '2022-09-27 07:03:45', 9),
+(79, 'nr7h0362.jpg', '', '2022-09-27 07:03:56', 9),
+(80, 'WhatsApp-Image-2022-06-29-at-20.52.10.webp', '', '2022-09-27 09:06:29', 10),
+(81, 'EodcrNNWMAAuCbT.jpg', '', '2022-09-27 09:06:37', 10);
 
 -- --------------------------------------------------------
 
@@ -193,7 +204,8 @@ INSERT INTO `tbl_province` (`CodeProvince`, `Province`) VALUES
 (1, 'Nord-kivu'),
 (2, 'Sud-kivu'),
 (4, 'Maniema'),
-(5, 'Ituri');
+(5, 'Ituri'),
+(6, 'Tanganyika');
 
 -- --------------------------------------------------------
 
@@ -203,14 +215,23 @@ INSERT INTO `tbl_province` (`CodeProvince`, `Province`) VALUES
 
 CREATE TABLE `tbl_reservation` (
   `CodeReservation` int(11) NOT NULL,
-  `Created_On` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `CodeSite` int(11) NOT NULL,
   `CodeClient` int(11) NOT NULL,
   `CodePaiement` int(11) NOT NULL,
   `DateDepart` datetime NOT NULL,
   `Status` int(11) NOT NULL,
-  `Date` datetime NOT NULL
+  `Date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `tbl_reservation`
+--
+
+INSERT INTO `tbl_reservation` (`CodeReservation`, `CodeSite`, `CodeClient`, `CodePaiement`, `DateDepart`, `Status`, `Date`) VALUES
+(3, 2, 4, 0, '2022-09-29 00:00:00', 0, '2022-09-27 13:30:35'),
+(4, 6, 4, 0, '2022-09-29 00:00:00', 1, '2022-09-27 13:31:41'),
+(5, 8, 5, 0, '2022-09-29 00:00:00', 0, '2022-09-27 13:33:25'),
+(6, 3, 5, 0, '2022-09-30 00:00:00', 0, '2022-09-28 06:36:15');
 
 -- --------------------------------------------------------
 
@@ -246,7 +267,8 @@ INSERT INTO `tbl_site` (`CodeSite`, `Designation`, `Description`, `Adresse`, `Lo
 (6, 'Rumangabo', 'Rumangabo est une base militaire de l\'armée de la République démocratique du Congo située dans le territoire de Rutshuru, au nord de Goma dans la province du Nord-Kivu, à 3,5 kilomètres au nord du siège du parc national des Virunga.', 'Rutshuru', '1.76464535', '27.96475', 100, '6 heures', 'ICCN', 'entering-rumangabo-station.jpg', 11, 1),
 (7, 'Parc National des Virunga', 'Le parc national des Virunga a été créé en 1925 dans l\'Est de la République démocratique du Congo, ce qui en fait le plus ancien parc national de l\'Afrique. Son objectif était initialement de protéger les gorilles des montagnes. À l\'origine, il était désigné sous le nom de parc Albert ; son nom actuel date de 1969.', 'Nord-kivu', '1.776789', '29.673738', 300, '1 jours', 'ICCN', 'landing_about.jpg', 10, 1),
 (8, 'Buhimba', '', 'Ville de goma', '1.776789', '28.964702', 10, '1 jours', 'Eglise catholique', 'seminaire-1.webp', 9, 1),
-(9, 'Goma Serena Hotel', 'Grand hôtel', 'Ville de goma', '1.776789', '27.964702', 200, '1 jour', 'IHUSI', 'lake-view.jpg', 1, 1);
+(9, 'Goma Serena Hotel', 'Grand hôtel', 'Ville de goma', '1.776789', '27.964702', 200, '1 jour', 'IHUSI', 'lake-view.jpg', 1, 1),
+(10, 'Rond point BDGL', 'Rond-point', 'Ville de goma', '1.776788', '27.987978', 10, '6 heures', 'Gouvernement congolais', 'EodcrNNWMAAuCbT.jpg', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -268,8 +290,9 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`CodeUser`, `Username`, `Password`, `Photo`, `Created_On`, `last_connection`) VALUES
-(1, 'Espoir', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'IMG_20210107_181859101.jpg', '2022-09-26 11:45:53', '2022-09-26 00:00:00'),
-(3, 'siwa', 'd033e22ae348aeb5660fc2140aec35850c4da997', '', '2022-09-21 19:57:02', '0000-00-00 00:00:00');
+(1, 'Espoir', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'espoir.jpg', '2022-09-28 06:38:51', '2022-09-28 00:00:00'),
+(3, 'siwa', 'd033e22ae348aeb5660fc2140aec35850c4da997', '', '2022-09-21 19:57:02', '0000-00-00 00:00:00'),
+(4, 'eric', '12345', 'IMG_9288.jpg', '2022-09-27 09:01:06', '2022-09-27 00:00:00');
 
 --
 -- Index pour les tables déchargées
@@ -337,7 +360,7 @@ ALTER TABLE `tbl_categorie`
 -- AUTO_INCREMENT pour la table `tbl_client`
 --
 ALTER TABLE `tbl_client`
-  MODIFY `CodeClient` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CodeClient` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `tbl_paiement`
@@ -349,31 +372,31 @@ ALTER TABLE `tbl_paiement`
 -- AUTO_INCREMENT pour la table `tbl_photo`
 --
 ALTER TABLE `tbl_photo`
-  MODIFY `CodePhoto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `CodePhoto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT pour la table `tbl_province`
 --
 ALTER TABLE `tbl_province`
-  MODIFY `CodeProvince` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `CodeProvince` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `tbl_reservation`
 --
 ALTER TABLE `tbl_reservation`
-  MODIFY `CodeReservation` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `CodeReservation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `tbl_site`
 --
 ALTER TABLE `tbl_site`
-  MODIFY `CodeSite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `CodeSite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `CodeUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `CodeUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

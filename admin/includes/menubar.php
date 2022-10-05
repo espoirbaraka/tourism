@@ -42,6 +42,7 @@
                 <li><a href="reservation"><i class="fa fa-circle-o"></i> Reservation</a></li>
             </ul>
         </li>
+        <li><a href="paiement"><i class="fa fa-money"></i> <span>Paiement</span></a></li>
 
 
       <li class="header">PARAMETRES</li>
