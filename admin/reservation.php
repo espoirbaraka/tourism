@@ -35,20 +35,43 @@ $conn = $pdo->open();
         <section class="content">
             <div class="row">
                 <div class="col-md-2">
-                    <div class="box box-solid">
-                        <div class="box-header with-border">
-                            <h4 class="box-title">Type de reservation</h4>
-                        </div>
-                        <div class="box-body">
-                            <!-- the events -->
-                            <div id="external-events">
-                                <div class="external-event bg-green">Reservation payée</div>
-                                <div class="external-event bg-yellow">Reservation non-payée</div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">Type de reservation</h4>
+                                </div>
 
+                                <div class="box-body">
+                                    <!-- the events -->
+                                    <div id="external-events">
+                                        <div class="external-event bg-green">Reservation payée</div>
+                                        <div class="external-event bg-yellow">Reservation non-payée</div>
+
+                                    </div>
+
+                                </div>
+                                <!-- /.box-body -->
                             </div>
                         </div>
-                        <!-- /.box-body -->
+
+                        <div class="col-md-12">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+                                    <h4 class="box-title">Action</h4>
+                                </div>
+
+                                <div class="box-body">
+
+                                    <div class="box-header with-border">
+                                        <a href="print/liste_reservation/pdf.php" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Imprimer</a>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
                     </div>
+
                     <!-- /. box -->
 
                 </div>
