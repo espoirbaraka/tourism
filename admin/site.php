@@ -61,6 +61,7 @@ $conn = $pdo->open();
                     <div class="box">
                         <div class="box-header with-border">
                             <a href="#addsite" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nouveau</a>
+                            <a href="print/liste_site/pdf.php" style="float: right;" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-print"></i> Imprimer</a>
                         </div>
                         <div class="box-body">
                             <div style="overflow: auto;">
