@@ -193,7 +193,7 @@ $reservation = array();
 $months = array();
 for( $m = 1; $m <= 12; $m++ ) {
     try{
-        $stmt = $conn->prepare("SELECT COUNT(CodeReservation) as nombre FROM tbl_reservation WHERE MONTH(Date)=:month AND YEAR(Date)=:year");
+        $stmt = $conn->prepare("SELECT COUNT(CodeReservation) as nombre FROM tbl_reservation WHERE MONTH(DateDepart)=:month AND YEAR(DateDepart)=:year");
         $stmt->execute(['month'=>$m, 'year'=>$year]);
         $total = 0;
         foreach($stmt as $row){

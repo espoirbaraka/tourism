@@ -76,11 +76,11 @@
             events    : [
                 <?php
                 $stmt = $conn->prepare("SELECT * FROM tbl_reservation
-                                        INNER JOIN
-                                        tbl_site
-                                        ON tbl_reservation.CodeSite=tbl_site.CodeSite
-                                        INNER JOIN tbl_client
-                                        ON tbl_reservation.CodeClient=tbl_client.CodeClient");
+                                                INNER JOIN
+                                                tbl_site
+                                                ON tbl_reservation.CodeSite=tbl_site.CodeSite
+                                                INNER JOIN tbl_client
+                                                ON tbl_reservation.CodeClient=tbl_client.CodeClient");
                 $stmt->execute();
                 foreach($stmt as $row){
                     $day = date("d", strtotime($row['DateDepart']));
@@ -90,8 +90,8 @@
                     {
                         title          : "<?php echo $row['Designation'] ?> : <?php echo $row['NomClient'].' '.$row['PostnomClient'] ?>",
                         start          : "<?php echo $year ?>, <?php echo $month ?>, <?php echo $day ?>",
-                        backgroundColor: '#f56954', //red
-                        borderColor    : '#f56954' //red
+                        backgroundColor: "<?php if($row['Status']==1){echo "#00a65a";}else{echo "#f39c12";} ?>", //red
+                        borderColor    : "<?php if($row['Status']==1){echo "#00a65a";}else{echo "#f39c12";} ?>" //red
                     },
                 <?php
                 }
