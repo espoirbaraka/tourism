@@ -4,9 +4,7 @@ require_once '../dompdf/autoload.inc.php';
 ob_start();
 
 $conn = $pdo->open();
-$stmt = $conn->prepare("SELECT * FROM tbl_site
-                                       INNER JOIN tbl_categorie
-                                       ON tbl_site.CodeCategorie=tbl_categorie.CodeCategorie");
+$stmt = $conn->prepare("SELECT * FROM tbl_client");
 $stmt->execute();
 
 require_once 'content.php';
@@ -23,7 +21,7 @@ $pdf= new Dompdf($options);
 $pdf->setPaper("A4", "portrait");
 $pdf->loadHtml($html);
 $pdf->render();
-$nom="liste des sites";
+$nom="liste des clients";
 $pdf->stream($nom, array('Attachment'=>0,false));
 
 ?>
