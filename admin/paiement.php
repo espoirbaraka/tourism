@@ -77,21 +77,25 @@ $conn = $pdo->open();
 
                                     try{
                                         $stmt = $conn->prepare("SELECT * FROM tbl_reservation
-");
+                                        INNER JOIN tbl_site
+                                        ON tbl_reservation.CodeSite=tbl_site.CodeSite
+                                        INNER JOIN tbl_client
+                                        ON tbl_reservation.CodeClient=tbl_client.CodeClient
+                                        LEFT JOIN tbl_paiement
+                                        ON tbl_reservation.CodeReservation=tbl_paiement.CodeReserv
+                                        ORDER BY DateDepart DESC");
                                         $stmt->execute();
                                         foreach($stmt as $client){
-
+                                            $status = ($client['Status']) ? '<span class="label label-success">Payé</span>' : '<span class="label label-danger">non payé</span>';
+                                            $button = ($client['Status']) ? '' : "<button class='btn btn-primary btn-sm payer btn-flat' data-id='".$client['CodeReservation']."'><i class='fa fa-money'></i> </button>";
                                             echo "
                           <tr>
+                            <td>".date("d/m/Y", strtotime($client['DateDepart']))."</td>
+                            <td>".$client['Designation']."</td>
                             <td>".$client['NomClient'].' '.$client['PostnomClient'].' '.$client['PrenomClient']."</td>
-                            <td>".$client['Telephone']."</td>
-                            <td>".$client['Email']."</td>
-                            <td>".$client['Nationalite']."</td>
-                            
-                            <td>
-                                <button class='btn btn-primary btn-sm edit btn-flat' data-id='".$client['CodeClient']."'><i class='fa fa-edit'></i> </button>
-                                <button class='btn btn-danger btn-sm remove btn-flat' data-id='".$client['CodeClient']."'><i class='fa fa-remove'></i> </button>
-                            </td>
+                            <td>".$client['Prevision'].'$ pour '.$client['TempsPrevision']."</td>
+                            <td>".$status."</td>
+                            <td>".$button."</td>
                           </tr>
                         ";
                                         }
@@ -115,7 +119,7 @@ $conn = $pdo->open();
         <!-- right col -->
     </div>
     <?php include 'includes/footer.php'; ?>
-    <?php include 'modal/client.php'; ?>
+    <?php include 'modal/paiement.php'; ?>
 </div>
 <!-- ./wrapper -->
 
@@ -138,6 +142,12 @@ $conn = $pdo->open();
             getRow(id);
         });
 
+        $(document).on('click', '.payer', function(e){
+            e.preventDefault();
+            $('#payer').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
 
 
     });
@@ -145,16 +155,14 @@ $conn = $pdo->open();
     function getRow(id){
         $.ajax({
             type: 'POST',
-            url: 'operation/client_row.php',
+            url: 'operation/paiement_row.php',
             data: {id:id},
             dataType: 'json',
             success: function(response){
-                $('.code').val(response.CodeClient);
-                $('#nom').val(response.NomClient);
-                $('#postnom').val(response.PostnomClient);
-                $('#prenom').val(response.PrenomClient);
-                $('#password').val(response.Password);
-                $('.fullname').html(response.NomClient);
+                $('.code').val(response.CodeReservation);
+                $('#nombre').val(response.Prevision);
+                $('.fullname').html(response.NomClient+' '+response.PostnomClient+' '+response.PrenomClient);
+                $('.site').html(response.Designation);
             }
         });
     }
