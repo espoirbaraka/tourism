@@ -43,7 +43,8 @@ $conn = $pdo->open();
                             <!-- the events -->
                             <div id="external-events">
                                 <div class="external-event bg-green">Reservation payée</div>
-                                <div class="external-event bg-yellow">Reservation non-payée</div>
+                                <div class="external-event bg-red">Reservation non-payée</div>
+                                <div class="external-event bg-yellow">Reservation payée, non-visité</div>
 
                             </div>
                         </div>
